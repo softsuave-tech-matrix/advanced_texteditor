@@ -1,0 +1,30 @@
+{
+  "name": "advanced_texteditor",
+  "version": "1.0.0",
+  "description": "It has advanced text editor features",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softsuave-tech-matrix/advanced_texteditor.git"
+  },
+  "keywords": [
+    "texteditor"
+  ],
+  "author": "softsuave",
+  "license": "MIT",
+  "bugs": {
+    "url": "git+https://github.com/softsuave-tech-matrix/advanced_texteditor/issues"
+  },
+  "homepage": "https://github.com/softsuave-tech-matrix/advanced_texteditor#readme",
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^3.0.2",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
