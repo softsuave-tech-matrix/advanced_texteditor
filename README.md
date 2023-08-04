@@ -1,6 +1,6 @@
 # advanced_texteditor
 
-# Example:
+# Examples:
 
 ## Pure js:
 
@@ -16,7 +16,7 @@
     <div id="editor"></div>
 </body>
 <script>
-    new Advanced.TextEditor("#editor", { toolbar: "bold italic underline strikeThrough formatBlock justifyLeft justifyCenter justifyRight justifyFull insertOrderedList insertUnorderedList insertHorizontalRule html pre indent outdent createLink unlink refresh undoRedo", onChange: (e) => { console.log(e) } })
+    new Advanced.TextEditor("#editor", { toolbar: "bold italic underline strikeThrough superscript subscript formatBlock justifyLeft justifyCenter justifyRight justifyFull insertOrderedList insertUnorderedList insertHorizontalRule html pre indent outdent createLink unlink refresh undoRedo clear", value: "<b>hello world</b>", onChange: (e,value) => { console.log(value) } })
 </script>
 
 </html>
@@ -37,8 +37,10 @@ class Sample extends React.Component {
 
     componentDidMount = () => {
        this.editoRef = new TextEditor("#editor", {
-          onChange: (e) => {
-            console.log(e);
+        toolbar: "bold italic underline strikeThrough superscript subscript formatBlock justifyLeft justifyCenter justifyRight justifyFull insertOrderedList insertUnorderedList insertHorizontalRule html pre indent outdent createLink unlink refresh undoRedo clear",
+        value: "<b>hello world</b>",
+          onChange: (e,value) => {
+            console.log(value);
           },
        }),
     }
@@ -62,8 +64,10 @@ const Sample = () => {
 
     useEffect(() => {
        editoRef.current = new TextEditor("#editor", {
-          onChange: (e) => {
-            console.log(e);
+        toolbar: "bold italic underline strikeThrough superscript subscript formatBlock justifyLeft justifyCenter justifyRight justifyFull insertOrderedList insertUnorderedList insertHorizontalRule html pre indent outdent createLink unlink refresh undoRedo clear",
+        value: "<b>hello world</b>",
+          onChange: (e,value) => {
+            console.log(e,value);
           },
        }),
     }, []);

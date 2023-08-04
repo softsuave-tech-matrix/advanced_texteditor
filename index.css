@@ -28,16 +28,27 @@
   gap: 5px;
 }
 
+.ate_editor .ate_bottom_bar [datalabel="clear"]{
+  position: absolute;
+  right: 0;
+  background: transparent;
+}
+
 .ate_editor .ate_toolbar {
   border-bottom: 1px solid;
 }
 
 .ate_editor .ate_bottom_bar {
   border-top: 1px solid;
+  position: relative;
 }
 
 .ate_editor .ate_bottom_bar button:disabled {
   filter: opacity(0.5);
+}
+
+.ate_editor .ate_toolbar [selected] {
+  background: #80808075 !important;
 }
 
 .ate_editor .ate_toolbar button,
@@ -48,6 +59,7 @@
   background: white;
   align-items: center;
   text-align: center;
+  position: relative;
 }
 
 .ate_editor .ate_toolbar select {
@@ -61,10 +73,13 @@
   text-align: center;
   border-radius: 5px;
   padding: 5px;
-  position: relative;
+  position: absolute;
   display: none;
-  top: 21px;
-  left: -22px;
+  z-index: 2;
+  left: -4px;
+  top: 20px;
+  transition: opacity 2s;
+  width: max-content;
 }
 
 .ate_editor .ate_toolbar button:hover .tooltiptext {

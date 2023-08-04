@@ -8,6 +8,7 @@ class TextEditor {
     this.bottomBar.className = "ate_bottom_bar";
     this.toolbar.className = "ate_toolbar";
     this.content.contentEditable = true;
+    this.content.id = "contenteditor";
     this.container && this.container.appendChild(this.toolbar);
     this.container && this.container.appendChild(this.content);
     this.container && this.container.appendChild(this.bottomBar);
@@ -17,9 +18,11 @@ class TextEditor {
     this.content.style = props.style || "max-height: 20vh;";
     this.sourceMode = false;
     this.micStatus = false;
-    this.history = [];
-    this.currentPosition = -1;
-    this.value = "";
+    this.history = this.props && this.props.value ? [this.props.value] : [];
+    this.currentPosition = this.props && this.props.value ? 0 : -1;
+    this.value = (this.props && this.props.value) || "";
+    this.content.innerHTML =
+      this.props && this.props.value ? this.props.value : "";
     this.tarNode = null;
     globalThis._this = this;
     this.initializeToolbar();
@@ -59,27 +62,37 @@ class TextEditor {
 
   initializeToolbar() {
     const buttons = [
-      { type: "button", label: "Bold", style: "bold", innerHTML: "<b>B</b>" },
       {
         type: "button",
+        tag: "b",
+        label: "Bold",
+        style: "bold",
+        innerHTML: "<b>B</b>",
+      },
+      {
+        type: "button",
+        tag: "i",
         label: "Italic",
         style: "italic",
         innerHTML: "<i>I</i>",
       },
       {
         type: "button",
+        tag: "u",
         label: "Underline",
         style: "underline",
         innerHTML: "<u>U</u>",
       },
       {
         type: "button",
+        tag: "strike",
         label: "Strike Through",
         style: "strikeThrough",
         innerHTML: "<s>S</s>",
       },
       {
         type: "button",
+        tag: "sup",
         label: "Super Script",
         style: "superscript",
         innerHTML:
@@ -87,6 +100,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "sub",
         label: "Sub Script",
         style: "subscript",
         innerHTML:
@@ -94,47 +108,55 @@ class TextEditor {
       },
       {
         type: "select",
+        tag: "i",
         label: "Heading",
         style: "formatBlock",
         options: [
           {
             type: "option",
+            tag: "h1",
             value: "H1",
             label: "Heading 1",
             style: "strikeThrough",
           },
           {
             type: "option",
+            tag: "h2",
             value: "H2",
             label: "Heading 2",
             style: "strikeThrough",
           },
           {
             type: "option",
+            tag: "h3",
             value: "H3",
             label: "Heading 3",
             style: "strikeThrough",
           },
           {
             type: "option",
+            tag: "h4",
             value: "H4",
             label: "Heading 4",
             style: "strikeThrough",
           },
           {
             type: "option",
+            tag: "h5",
             value: "H5",
             label: "Heading 5",
             style: "strikeThrough",
           },
           {
             type: "option",
+            tag: "h6",
             value: "H6",
             label: "Heading 6",
             style: "strikeThrough",
           },
           {
             type: "option",
+            tag: "p",
             value: "P",
             label: "Paragraph",
             style: "strikeThrough",
@@ -143,6 +165,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "left",
         label: "Justify Left",
         style: "justifyLeft",
         innerHTML:
@@ -150,6 +173,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "center",
         label: "Justify Center",
         style: "justifyCenter",
         innerHTML:
@@ -157,6 +181,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "right",
         label: "Justify Right",
         style: "justifyRight",
         innerHTML:
@@ -164,6 +189,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "justify",
         label: "Justify",
         style: "justifyFull",
         innerHTML:
@@ -171,6 +197,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "ol",
         label: "Ordered List",
         style: "insertOrderedList",
         innerHTML:
@@ -178,6 +205,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "ul",
         label: "Unordered List",
         style: "insertUnorderedList",
         innerHTML:
@@ -185,12 +213,14 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "hr",
         label: "Horizontal Rule",
         style: "insertHorizontalRule",
         innerHTML: '<span style="padding:0;font-size: 17px;">HR</span>',
       },
       {
         type: "sourceMode",
+        tag: "html",
         label: "HTML",
         style: "html",
         onClick: () => this.toggleSource(),
@@ -198,12 +228,14 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "pre",
         label: "PRE",
         style: "pre",
         innerHTML: '<span style="font-size:17px">&#60;&#47;&#62;</span>',
       },
       {
         type: "button",
+        tag: "blockquote",
         label: "Indent",
         style: "indent",
         innerHTML: "&#10140;",
@@ -216,6 +248,7 @@ class TextEditor {
       },
       {
         type: "button",
+        tag: "a",
         label: "Link",
         style: "createLink",
         onClick: () => {
@@ -269,13 +302,14 @@ class TextEditor {
       },
       {
         type: "button",
-        label: "Refresh",
-        style: "refresh",
+        tag: "clear",
+        label: "Clear",
+        style: "clear",
         parent: "bottom",
         onClick: () => {
           this.clearAll();
         },
-        innerHTML: '<span style="font-size:25px">&#x21bb;</span>',
+        innerHTML: '<span style="font-size:26px">&#x21bb;</span>',
       },
     ];
 
@@ -309,6 +343,7 @@ class TextEditor {
         this.setUpEventListnerBtn(btn, button);
       } else {
         btn = document.createElement(button.type);
+        btn.setAttribute("datalabel", button.tag);
         btn.innerHTML = button.innerHTML;
         btn.style = "cursor: pointer;";
         this.setUpEventListnerBtn(btn, button);
@@ -346,6 +381,36 @@ class TextEditor {
     }
   }
 
+  doHighlight() {
+    if (this.selection) {
+      const focNode = this.selection.focusNode.parentElement;
+      const selectButn = (ele) => {
+        if (ele && ele.id !== "contenteditor") {
+          const ele2 = this.toolbar.querySelector(
+            `[datalabel='${
+              ele.nodeName.toLowerCase() === "div"
+                ? ele.style.textAlign
+                : ele.nodeName.toLowerCase()
+            }']`
+          );
+          
+          if (ele2) {
+            ele2.setAttribute("selected", true);
+          }
+          selectButn(ele.parentElement);
+        }
+      };
+
+      selectButn(focNode);
+    }
+  }
+
+  clearHighlight() {
+    this.toolbar.childNodes.forEach((nodeEle) => {
+      nodeEle.removeAttribute("selected");
+    });
+  }
+
   setCursPosition(node, index) {
     var range = document.createRange();
     var sel = window.getSelection();
@@ -380,15 +445,37 @@ class TextEditor {
       if (button.onClick) {
         button.onClick(btnElem);
       } else this.execCmd(button.style, button.value);
+      if (btnElem.hasAttribute("selected")) {
+        btnElem.removeAttribute("selected");
+      } else {
+        if (
+          btnElem.getAttribute("datalabel") === "right" ||
+          btnElem.getAttribute("datalabel") === "center" ||
+          btnElem.getAttribute("datalabel") === "left" ||
+          btnElem.getAttribute("datalabel") === "justify"
+        ) {
+          this.clearHighlight();
+          setTimeout(() => {
+            this.doHighlight();
+          },100)
+        } else {
+          if (this.selection && this.selection.toString())
+          btnElem.setAttribute("selected", true);
+        }
+      }
     });
   }
 
   setupEventListeners() {
-    this.content.addEventListener("mouseup", () => this.updateSelection());
-    this.content.addEventListener("mousedown", () => this.updateSelection());
-    this.content.addEventListener("keyup", () => this.updateSelection());
-    this.content.addEventListener("keydown", () => this.updateSelection());
-    this.content.addEventListener("blur", () => this.updateHistory());
+    // this.content.addEventListener("mouseup", () => this.updateSelection("mouseup"));
+    this.content.addEventListener("mousedown", () =>
+      this.updateSelection("mousedown")
+    );
+    // this.content.addEventListener("keyup", () => this.updateSelection("keyup"));
+    this.content.addEventListener("keydown", () =>
+      this.updateSelection("keydown")
+    );
+    this.content.addEventListener("blur", () => this.updateHistory("blur"));
     this.content.addEventListener("input", (e) => {
       this.value = this.content.innerText;
       if (
@@ -399,12 +486,17 @@ class TextEditor {
       ) {
         this.updateHistory();
       }
-      this.props && this.props.onChange && this.props.onChange(e);
+      this.props && this.props.onChange && this.props.onChange(e, this.value);
     });
   }
 
-  updateSelection() {
+  updateSelection(type) {
+    console.log(type);
+    this.clearHighlight();
     this.selection = window.getSelection();
+    setTimeout(() => {
+      this.doHighlight();
+    }, 100);
     this.content.childNodes.forEach((node) => {
       if (node.contains(this.selection.getRangeAt(0).endContainer)) {
         this.tarNode = node;
@@ -482,6 +574,7 @@ class TextEditor {
   }
 
   clearAll() {
+    this.clearHighlight();
     this.content.innerHTML = "";
   }
 
@@ -631,13 +724,12 @@ class TextEditor {
 
       speechRecognizer.onresult = (event) => {
         var finalTranscripts = "";
-        console.log("event", event);
+
         for (var i = 0; i < event.results.length; i++) {
           for (var j = 0; j < event.results[i].length; j++) {
             const transcript = event.results[i][j].transcript;
 
             finalTranscripts += transcript;
-            console.log("finalTranscripts", finalTranscripts);
           }
         }
         this.updateHistory();
