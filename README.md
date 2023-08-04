@@ -1,4 +1,5 @@
 # advanced_texteditor
+    It has basic text editing tools and speech to text feature.
 
 # Examples:
 
