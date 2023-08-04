@@ -79,106 +79,32 @@ const Sample = () => {
 ```
 
 ### Custom Styles
-Create index.css file and update following format
+Create index.css file, import this file and update css like below
 ```
 .ate_editor [contenteditable] {
-  padding: 8px 12px;
-  min-height: 20vh;
-  cursor: pointer;
-  overflow: auto;
-  background: white;
-}
-
-.ate_editor [contenteditable]:focus-visible {
-  border: none;
-  outline: none;
-}
-
-.ate_editor {
-  border: 1px solid black;
-  background: white;
-  margin: 10px;
+   // add here
 }
 
 .ate_editor .ate_toolbar,
 .ate_editor .ate_bottom_bar {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  padding: 5px;
-  background: white;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.ate_editor .ate_toolbar {
-  border-bottom: 1px solid;
-}
-
-.ate_editor .ate_bottom_bar {
-  border-top: 1px solid;
-}
-
-.ate_editor .ate_bottom_bar button:disabled {
-  filter: opacity(0.5);
+   // add here
 }
 
 .ate_editor .ate_toolbar button,
 .ate_editor .ate_bottom_bar button {
-  border: none;
-  display: flex;
-  font-size: 16px;
-  background: white;
-  align-items: center;
-  text-align: center;
-}
-
-.ate_editor .ate_toolbar select {
-  font-size: 16px;
+   // add here
 }
 
 .ate_editor .ate_toolbar button .tooltiptext,
 .ate_editor .ate_bottom_bar button .tooltiptext {
-  visibility: hidden;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px;
-  position: absolute;
-}
-
-.ate_editor .ate_toolbar button:hover .tooltiptext {
-  visibility: visible;
+   // add here
 }
 
 .ate_editor .ate_bottom_bar {
-  /* height: 20px; */
-  background: #fff;
+   // add here
 }
 
-.ate_editor table {
-  border: 1px solid;
-  border-collapse: collapse;
-}
-
-.ate_editor table tr td {
-  border: 1px solid;
-}
-
-.ate_editor .ate_bottom_bar .ripple {
-  animation: ripple 2s linear infinite;
-  border-radius: 50%;
-}
-
-
-@keyframes ripple {
-  0% {
-    box-shadow: 0 0 0 0 #0000008a
-  }
-  100% {
-    box-shadow: 0 0 0 5px #0000008a
-  }
-}
+// add here
 
 ```
+![Ref Instance](./response.png)
