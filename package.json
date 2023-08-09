@@ -1,6 +1,6 @@
 {
   "name": "advanced_texteditor",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "It has advanced text editor features",
   "main": "./dist/index.js",
   "scripts": {

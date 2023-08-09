@@ -98,6 +98,8 @@
 
 .ate_editor table tr td {
   border: 1px solid;
+  width: 20px;
+  height: 20px;
 }
 
 .ate_editor .ate_bottom_bar .ripple {
