@@ -1,5 +1,5 @@
 # Advanced Texteditor
-    It has basic text editing tools and speech to text feature. [Demo](index.html)
+    It has basic text editing tools and speech to text feature.
 
 # Examples:
 
