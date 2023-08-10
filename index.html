@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="dist/index.js"></script>
+</head>
+
+<body>
+    <h1>Text Editor</h1>
+    <div id="editor"></div>
+</body>
+
+<script>
+    new Advanced.TextEditor("#editor", { value: "<b>Hellow World</b>" ,toolbar: "bold italic underline strikeThrough superscript subscript formatBlock justifyLeft justifyCenter justifyRight justifyFull insertOrderedList insertUnorderedList insertHorizontalRule html pre indent outdent createLink unlink refresh undoRedo clear selectAll",onChange: (e) => { console.log(e) } })
+</script>
+
+</html>
