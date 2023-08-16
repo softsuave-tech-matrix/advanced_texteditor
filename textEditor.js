@@ -25,6 +25,7 @@ class TextEditor {
       this.props && this.props.value ? this.props.value : "";
     this.tarNode = null;
     this.childWin = null;
+    this.selectedTag = "";
     globalThis._this = this;
     this.initializeToolbar();
     this.setupEventListeners();
@@ -372,6 +373,7 @@ class TextEditor {
   }
 
   doHighlight() {
+    this.selectedTag = "";
     if (this.selection) {
       const focNode = this.selection.focusNode.parentElement;
       const selectButn = (ele) => {
@@ -386,6 +388,7 @@ class TextEditor {
 
           if (ele2) {
             ele2.setAttribute("selected", true);
+            this.selectedTag = this.selectedTag + `<${ele.nodeName.toLowerCase()}>`; 
           }
           selectButn(ele.parentElement);
         }
@@ -396,7 +399,8 @@ class TextEditor {
   }
 
   clearHighlight() {
-    this.toolbar.childNodes.forEach((nodeEle) => {
+    this.toolbar.childNodes.forEach((nodeEle,index) => {
+      if (!this.selectedTag.includes(`<${nodeEle.getAttribute('datalabel')}>`))
       nodeEle.removeAttribute("selected");
     });
   }
@@ -450,6 +454,7 @@ class TextEditor {
           }, 100);
         } else {
           if (this.selection && this.selection.toString())
+            this.selectedTag = this.selectedTag + `<${btnElem.getAttribute("datalabel")}>`;
             btnElem.setAttribute("selected", true);
         }
       }
@@ -481,12 +486,11 @@ class TextEditor {
   }
 
   updateSelection(type) {
-    console.log(type);
-    this.clearHighlight();
     this.selection = window.getSelection();
     setTimeout(() => {
       this.doHighlight();
-    }, 100);
+      this.clearHighlight();
+    },100);
     this.content.childNodes.forEach((node) => {
       if (node.contains(this.selection.getRangeAt(0).endContainer)) {
         this.tarNode = node;
