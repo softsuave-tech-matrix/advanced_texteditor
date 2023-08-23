@@ -136,6 +136,56 @@ class TextEditor {
         ],
       },
       {
+        type: "select",
+        tag: "f",
+        label: "Select font",
+        style: "fontName",
+        options: [
+          {
+            type: "option",
+            tag: "f1",
+            value: "'Arial', sans-serif",
+            label: "Arial, sans-serif",
+            style: "'Arial', sans-serif",
+          },
+          {
+            type: "option",
+            tag: "f2",
+            value: "'Times New Roman', serif",
+            label: "Times New Roman, serif",
+            style: "'Times New Roman', serif",
+          },
+          {
+            type: "option",
+            tag: "f3",
+            value: "'Courier New', monospace",
+            label: "Courier New, monospace",
+            style: "'Courier New', monospace",
+          },
+          {
+            type: "option",
+            tag: "f4",
+            value: "'Georgia', serif",
+            label: "Georgia, serif",
+            style: "'Georgia', serif"
+          },
+          {
+            type: "option",
+            tag: "f5",
+            value: "'Trebuchet MS', sans-serif",
+            label: "Trebuchet MS, sans-serif",
+            style: "'Trebuchet MS', sans-serif",
+          },
+          {
+            type: "option",
+            tag: "f6",
+            value: "'Verdana', sans-serif",
+            label: "Verdana, sans-serif",
+            style: "'Verdana', sans-serif",
+          },
+        ],
+      },
+      {
         type: "button",
         tag: "left",
         label: "Justify Left",
